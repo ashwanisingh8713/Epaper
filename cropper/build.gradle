@@ -1,0 +1,43 @@
+//apply plugin: 'com.android.library'
+
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+    defaultConfig {
+        applicationId "com.ninestars.epaper"
+        minSdkVersion 16
+        targetSdkVersion rootProject.compileSdkVersion
+        versionCode 1
+        versionName "1.1"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+
+dependencies {
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+//    implementation "androidx.exifinterface:exifinterface:$androidXLibraryVersion"
+    implementation deps.supportAnnotations
+    implementation project(':photoview')
+
+    implementation deps.rxjava2
+    implementation deps.rxAndroid2
+    implementation deps.rxRetrofitAdapter
+    implementation deps.gson
+    implementation deps.retrofit
+    implementation deps.retrofitGsonConverter
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+
+    implementation deps.glide
+    annotationProcessor deps.glide_annotationProcessor
+}
+
