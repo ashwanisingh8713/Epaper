@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
     private Button mShowHideCropLayoutBtn;
     private Button mCroppingBtn;
 
+    private float mScaleValue = 1.0f;
+
     public void updateCurrentCropViewOptions() {
         CropImageViewOptions options = new CropImageViewOptions();
         options.scaleType = mCropImageView.getScaleType();
@@ -81,10 +83,15 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
         mCropImageView.setOnSetImageUriCompleteListener(this);
         mCropImageView.setOnCropImageCompleteListener(this);
 
-        mCropImageView.setAutoZoomEnabled(false);
+        // Auto zoom should be enabled currently to work with CROP feature.
+        // Currently CROP feature will not work correctly if auto zoom is disabled.
+        mCropImageView.setAutoZoomEnabled(true);
         mCropImageView.setShowCropOverlay(false);
+        mCropImageView.setMultiTouchEnabled(false);
 
         mPhotoView = mCropImageView.getPhotoView();
+
+
 
         mShowHideCropLayoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,14 +108,12 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
                 if(mCropImageView.isShowCropOverlay()) {
                     mCropImageView.getCroppedImageAsync();
                 }
-
             }
         });
 
 
         updateCurrentCropViewOptions();
         mCropImageView.setImageResource(R.drawable.epaper);
-
 
         // PhotoView, ViewTreeObserver to get Initial width and Height
         ViewTreeObserver viewTreeObserver = mPhotoView.getViewTreeObserver();
@@ -215,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
             @Override
             public boolean onLongClick(View v) {
                 Toast.makeText(MainActivity.this, "Long", Toast.LENGTH_SHORT).show();
+                mPhotoView.setScale(mScaleValue);
                 mCropImageView.setShowCropOverlay(!mCropImageView.isShowCropOverlay());
                 return false;
             }
@@ -380,9 +386,9 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
             // Removes Bound view
             removeBoundView();
 
+            float scale = mPhotoView.getScale();
             if (mOriginalVertexData != null) {
                 mRectF = rect;
-                float scale = mPhotoView.getScale();
                 mModifiedVertexData = new ArrayList<>();
                 for (VertexData data : mOriginalVertexData) {
                     int x = (int) (((data.getX() * scale)));
@@ -402,6 +408,8 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
 
                 }
             }
+
+            Log.i("Ashwani", "PhotoView Scale :: "+scale);
 
 
             ///////////////////////////////////////////////////////

@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.chrisbanes.photoview.PhotoView;
 import com.theartofdev.edmodo.cropper.R;
 
 public final class CropResultActivity extends Activity {
@@ -30,7 +31,7 @@ public final class CropResultActivity extends Activity {
   /** The image to show in the activity. */
   static Bitmap mImage;
 
-  private ImageView imageView;
+  private PhotoView imageView;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,8 @@ public final class CropResultActivity extends Activity {
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.activity_crop_result);
 
-    imageView = ((ImageView) findViewById(R.id.resultImageView));
-    imageView.setBackgroundResource(R.drawable.backdrop);
+    imageView = findViewById(R.id.resultImageView);
+//    imageView.setBackgroundResource(R.drawable.backdrop);
 
     Intent intent = getIntent();
     if (mImage != null) {
@@ -51,17 +52,17 @@ public final class CropResultActivity extends Activity {
         byteCount = mImage.getByteCount() / 1024;
       }
       String desc =
-          "("
-              + mImage.getWidth()
-              + ", "
-              + mImage.getHeight()
-              + "), Sample: "
-              + sampleSize
-              + ", Ratio: "
-              + ratio
-              + ", Bytes: "
-              + byteCount
-              + "K";
+              "("
+                      + mImage.getWidth()
+                      + ", "
+                      + mImage.getHeight()
+                      + "), Sample: "
+                      + sampleSize
+                      + ", Ratio: "
+                      + ratio
+                      + ", Bytes: "
+                      + byteCount
+                      + "K";
       ((TextView) findViewById(R.id.resultImageText)).setText(desc);
     } else {
       Uri imageUri = intent.getParcelableExtra("URI");
