@@ -229,6 +229,12 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPhotoView.setScale(mScaleValue);
+        mCropImageView.setShowCropOverlay(false);
+    }
 
     private void addBoundView(ArrayList<Pair<VertexData, Paint>> selectedPair) {
         // Removes Bound view
