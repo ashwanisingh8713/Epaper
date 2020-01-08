@@ -52,7 +52,7 @@ public class CropImageView extends FrameLayout {
   private final PhotoView mImageView;
 
   /** Overlay over the image view to show cropping UI. */
-  private final CropOverlayView mCropOverlayView;
+  public CropOverlayView mCropOverlayView;
 
   /** The matrix used to transform the cropping image in the image view */
   private final Matrix mImageMatrix = new Matrix();

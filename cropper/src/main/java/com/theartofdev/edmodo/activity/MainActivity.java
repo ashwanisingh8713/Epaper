@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
         });
 
 
-        updateCurrentCropViewOptions();
+//        updateCurrentCropViewOptions();
         mCropImageView.setImageResource(R.drawable.epaper);
 
         // PhotoView, ViewTreeObserver to get Initial width and Height
@@ -232,12 +232,19 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
     @Override
     protected void onResume() {
         super.onResume();
-        resetPhotoView();
-        mCropImageView.setShowCropOverlay(false);
+//        resetPhotoView();
+//        mCropImageView.setShowCropOverlay(false);
     }
 
     private void resetPhotoView() {
-        mPhotoView.setScale(mScaleValue);
+//        mPhotoView.setScale(mScaleValue);
+//        mCropImageView.setScaleX(mScaleValue);
+//        mCropImageView.setScaleY(mScaleValue);
+
+//        mCropImageView.clearAspectRatio();
+//        mCropImageView.mCropOverlayView.resetCropWindowRect();
+        // Now with this it working but with all value and states are resetting.
+        mCropImageView.resetCropRect();
     }
 
     private void addBoundView(ArrayList<Pair<VertexData, Paint>> selectedPair) {
