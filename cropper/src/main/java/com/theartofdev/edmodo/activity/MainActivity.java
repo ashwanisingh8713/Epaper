@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
             @Override
             public boolean onLongClick(View v) {
                 Toast.makeText(MainActivity.this, "Long", Toast.LENGTH_SHORT).show();
-                mPhotoView.setScale(mScaleValue);
+                resetPhotoView();
                 mCropImageView.setShowCropOverlay(!mCropImageView.isShowCropOverlay());
                 return false;
             }
@@ -232,8 +232,12 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
     @Override
     protected void onResume() {
         super.onResume();
-        mPhotoView.setScale(mScaleValue);
+        resetPhotoView();
         mCropImageView.setShowCropOverlay(false);
+    }
+
+    private void resetPhotoView() {
+        mPhotoView.setScale(mScaleValue);
     }
 
     private void addBoundView(ArrayList<Pair<VertexData, Paint>> selectedPair) {
@@ -337,6 +341,7 @@ public class MainActivity extends AppCompatActivity implements CropImageView.OnS
     @Override
     public void onBackPressed() {
         if(mCropImageView.isShowCropOverlay()) {
+            resetPhotoView();
             mCropImageView.setShowCropOverlay(false);
         }
         else {
